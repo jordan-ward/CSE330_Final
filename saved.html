@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daily Quote Image Generator — Saved</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Daily Quote Image Generator</h1>
+        <div class="small muted">Here are all of your saved quotes.</div>
+      </div>
+      <nav>
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn" href="saved.html">Saved</a>
+        <a class="btn" href="login.html">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card" id="saved-card">
+        <div class="header-row">
+          <strong>Saved Quotes</strong>
+          <div class="row">
+            <label class="small muted">Sort</label>
+            <select id="sort-select">
+              <option value="newest">Newest</option>
+              <option value="oldest">Oldest</option>
+              <option value="author">Author</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="saved-area" style="margin-top:12px">
+          <div class="flip-grid" id="saved-grid"></div>
+          <div id="no-saved" class="small muted" style="display:none;margin-top:10px">No saved quotes yet.</div>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <strong>Profile</strong>
+          <div style="margin-top:10px" id="profile-area">
+            <div class="small muted" id="profile-msg">Not signed in</div>
+            <div class="row" style="margin-top:8px">
+              <div class="pill" id="profile-username"></div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </aside>
+    </main>
+
+    <footer>Jordan Ward - CSE 330</footer>
+  </div>
+
+  <script type="module" src="common.js"></script>
+  <script type="module" src="saved.js"></script>
+</body>
+</html>

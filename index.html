@@ -1,43 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quote Generator</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daily Quote Image Generator — Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
+  <div class="app">
     <header>
-        <div class="logo">
-            <img src="" alt="Logo">
-        </div>
-        <nav>
-            <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Library</a></li>
-                <li><a href="#">Login</a></li>
-            </ul>
-        </nav>
+      <div>
+        <h1>Daily Quote Image Generator</h1>
+        <div class="small muted">Generate your quote today!</div>
+      </div>
+      <nav>
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn" href="saved.html">Saved</a>
+        <a class="btn" href="login.html">Login</a>
+      </nav>
     </header>
 
     <main>
+      <section class="card" id="home-card">
+        <div class="row" style="justify-content:space-between">
+          <div>
+            <strong>Generate today’s quote</strong>
+            <div class="small muted">Click generate to create a quote for today!</div>
+          </div>
 
-        <section class="workspace">
-            <div class="image-placeholder">
-                <img src="" alt="Image Placeholder">
-            </div>
-            <aside class="instructions">
-                <p>Instructions:</p>
-            </aside>
-        </section>
-
-        <div class="actions">
-            <button type="button" id="save-btn">Save</button>
-            <button type="button" id="generate-btn">Generate</button>
+          <div class="row">
+            <button class="btn" id="btn-generate">Generate Quote</button>
+            <button class="btn" id="btn-save" title="Save quote and image to your profile">Save</button>
+          </div>
         </div>
 
+        <hr />
+
+        <div class="preview" id="preview">
+          <img id="preview-image" src="" alt="" />
+          <div id="preview-overlay">
+            <div id="quote-text" class="quote-text">Your daily quote will appear here.</div>
+            <div id="quote-author" class="author">— Source</div>
+          </div>
+        </div>
+      </section>
+
+      <aside>
+        <div class="card">
+          <strong>Profile</strong>
+          <div id="profile-area" style="margin-top:10px">
+            <div class="small muted" id="profile-msg">Not signed in</div>
+            <div id="profile-controls" class="row" style="margin-top:8px">
+              <div class="pill" id="profile-username"></div>
+            </div>
+          </div>
+
+          <hr />
+
+          <div>
+            <strong class="small">Quick actions</strong>
+            <div class="quick-actions">
+              <a class="btn" href="saved.html">View Saved</a>
+              <button id="btn-clear-saved" class="btn danger">Clear Saved</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="card about" style="margin-top:12px">
+          <strong class="small">About</strong>
+          <div class="small muted" style="margin-top:8px">
+            You can save each days quote using the save button, but you must be signed in to do so.
+          </div>
+        </div>
+      </aside>
     </main>
-    
+
+    <footer>Jordan Ward - CSE 330</footer>
+  </div>
+
+  <script type="module" src="common.js"></script>
+  <script type="module" src="home.js"></script>
 </body>
 </html>

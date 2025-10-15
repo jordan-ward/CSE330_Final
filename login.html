@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Daily Quote Image Generator — Login</title>
+  <link href="https://fonts.googleapis.com/css2?family=Alegreya:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div>
+        <h1>Daily Quote Image Generator</h1>
+        <div class="small muted">Please login to begin.</div>
+      </div>
+      <nav>
+        <a class="btn" href="index.html">Home</a>
+        <a class="btn" href="saved.html">Saved</a>
+        <a class="btn" href="login.html">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="card" id="login-card">
+        <strong>Login to save quotes</strong>
+        <form id="login-form" class="form-column">
+          <label class="small">Username</label>
+          <input id="username" type="text" placeholder="e.g., jordan" required />
+          <label class="small">Password</label>
+          <input id="password" type="password" placeholder="client-side demo only" required />
+          <div class="row" style="margin-top:6px">
+            <button class="btn" type="submit">Sign in</button>
+            <button class="btn danger" id="btn-logout" type="button">Log out</button>
+          </div>
+          <div id="login-msg" class="small muted"></div>
+        </form>
+      </section>
+
+      <aside>
+        <div class="card">
+          <strong>Profile</strong>
+          <div style="margin-top:10px" id="profile-area">
+            <div class="small muted" id="profile-msg">Not signed in</div>
+            <div class="row" style="margin-top:8px">
+              <div class="pill" id="profile-username"></div>
+            </div>
+          </div>
+          <hr />
+        </div>
+      </aside>
+    </main>
+
+    <footer>Jordan Ward - CSE 330</footer>
+  </div>
+
+  <script type="module" src="common.js"></script>
+  <script type="module" src="login.js"></script>
+</body>
+</html>
