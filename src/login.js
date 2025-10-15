@@ -1,4 +1,3 @@
-// login.js - wiring for login.html
 import { signIn, signOut, state, loadSavedForUser } from './common.js';
 
 const form = document.getElementById('login-form');

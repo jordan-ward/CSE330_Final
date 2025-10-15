@@ -25,40 +25,31 @@ function updateProfileUI(){
   }
 }
 
-function renderPreview(quote, imageUrl){
+function renderPreview(quote, imageUrl) {
   state.currentQuote = quote;
   state.currentImageUrl = imageUrl || '';
-  // animate text slightly
+
   el.quoteText.style.transform = 'scale(1.02)';
-  setTimeout(()=> el.quoteText.style.transform = 'scale(1)', 300);
+  setTimeout(() => el.quoteText.style.transform = 'scale(1)', 300);
 
   el.quoteText.textContent = quote.text;
   el.quoteAuthor.textContent = `— ${quote.author || quote.source || 'Unknown'}`;
 
-  if(imageUrl){
+  if (imageUrl) {
     el.previewImage.src = imageUrl;
-    // ensure the element becomes visible
     el.previewImage.style.opacity = '1';
+
+    el.previewImage.onerror = () => {
+      console.warn("Image failed to load, using fallback.");
+      const fallback = generateThumbnailFallback(quote);
+      el.previewImage.src = fallback;
+    };
   } else {
-    // fallback: try thumbnail canvas then show
     const fallback = generateThumbnailFallback(quote);
     el.previewImage.src = fallback;
     el.previewImage.style.opacity = '1';
   }
 }
-
-el.btnGenerate.addEventListener('click', async ()=>{
-  // fetch a quote (uses common.js fetchQuote)
-  const mode = Math.random() > 0.5 ? 'today' : 'random';
-  const q = await fetchQuote(mode);
-  
-
-  // get a LoremFlickr URL synchronously from common.js
-  const imgUrl = renderImageFromQuote(q); // returns loremflickr url string
-
-  // render immediately: quote + image
-  renderPreview(q, imgUrl);
-});
 
 el.btnSave.addEventListener('click', ()=>{
   if(!state.user){ alert('Please sign in to save'); return; }
@@ -71,8 +62,8 @@ el.btnSave.addEventListener('click', ()=>{
     tags: state.currentQuote.tags,
     source: state.currentQuote.source,
     dateSaved: new Date().toISOString(),
-    templateUsed: 'loremflickr',
-    bgColor: '#', // placeholder if you track color
+    templateUsed: 'picsum',
+    bgColor: '#', 
     length: state.currentQuote.length,
     imageUrl: state.currentImageUrl || '',
     popularity: state.currentQuote.popularity || 0
@@ -91,12 +82,20 @@ el.btnClearSaved.addEventListener('click', ()=>{
   alert('Cleared saved items');
 });
 
+el.btnGenerate.addEventListener('click', async () => {
+  try {
+    const quote = await fetchQuote();
+    const imageUrl = renderImageFromQuote(quote);
+    renderPreview(quote, imageUrl);
+  } catch (err) {
+    console.error('Error generating quote:', err);
+    alert('Failed to generate quote. Please try again.');
+  }
+});
 
-// on load: restore profile and consume preview token if present
 window.addEventListener('load', ()=>{
   updateProfileUI();
 
-  // If redirected from saved page, show preview
   const raw = localStorage.getItem('dqg_preview');
   if(raw){
     try{
@@ -107,7 +106,6 @@ window.addEventListener('load', ()=>{
   }
 });
 
-// keep cross-tab sync
 window.addEventListener('storage', (ev)=>{
   if(!state.user) return;
   if(ev.key && ev.key.startsWith('dqg_user_')) loadSavedForUser();
