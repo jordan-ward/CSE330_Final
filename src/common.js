@@ -41,6 +41,33 @@ function enrichQuote(quoteObj){
   };
 }
 
+// export async function fetchQuote() {
+//   try {
+//     const res = await fetch('https://type.fit/api/quotes');
+//     const data = await res.json();
+//     const quoteObj = data[Math.floor(Math.random() * data.length)];
+
+//     return enrichQuote({
+//       text: quoteObj.text,
+//       author: quoteObj.author,
+//       tags: ['inspiration'],
+//       source: 'type.fit',
+//       license: 'public-domain'
+//     });
+//   } catch (err) {
+//     console.error('Quote fetch failed', err);
+//     return enrichQuote({
+//       id: 'local-1',
+//       text: 'Do not wait to strike till the iron is hot; but make it hot by striking.',
+//       author: 'William Butler Yeats',
+//       tags: ['motivation','action'],
+//       source: 'local_fallback',
+//       popularity: 76,
+//       license: 'public-domain'
+//     });
+//   }
+// }
+
 export async function fetchQuote() {
   try {
     const res = await fetch('/data/quotes.json');
